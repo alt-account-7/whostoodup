@@ -86,6 +86,7 @@
         <p class="hero-context">
           WhoStoodUp is a crowdsourced, verbatim record of every celebrity and politician who has
           publicly commented. Support and opposition both tracked — every claim sourced.
+          <a href="why.html" class="hero-why-link">Find out why we built this — click here →</a>
         </p>
       </div>
     </div>
@@ -120,28 +121,6 @@
   </div>
 </section>
 
-<!-- ── Filter bar (sticky below nav) ─────────────────────────────────── -->
-<div id="filter-sentinel"></div>
-<div class="filter-bar" id="filter-bar" role="group" aria-label="Filter entries">
-  <div class="filter-group" role="group" aria-label="Filter by stance">
-    <span class="filter-label">Stance</span>
-    <button class="filter-btn active" data-filter="stance" data-value="all" aria-pressed="true">All</button>
-    <button class="filter-btn" data-filter="stance" data-value="support" aria-pressed="false">Support</button>
-    <button class="filter-btn" data-filter="stance" data-value="opposition" aria-pressed="false">Opposed</button>
-    <button class="filter-btn" data-filter="stance" data-value="neutral" aria-pressed="false">Neutral</button>
-  </div>
-  <div class="filter-group" role="group" aria-label="Filter by role">
-    <span class="filter-label">Role</span>
-    <button class="filter-btn active" data-filter="role" data-value="all" aria-pressed="true">All</button>
-    <button class="filter-btn" data-filter="role" data-value="celebrity" aria-pressed="false">Celebrity</button>
-    <button class="filter-btn" data-filter="role" data-value="politician" aria-pressed="false">Politician</button>
-    <button class="filter-btn" data-filter="role" data-value="influencer" aria-pressed="false">Influencer</button>
-    <button class="filter-btn" data-filter="role" data-value="journalist" aria-pressed="false">Journalist</button>
-    <button class="filter-btn" data-filter="role" data-value="other" aria-pressed="false">Other</button>
-  </div>
-
-</div>
-
 <!-- ── Quote ticker (blue-50 tint) ──────────────────────────────────── -->
 <div class="quote-ticker" aria-label="Quote">
   <blockquote class="quote-text" id="quote-text">
@@ -153,6 +132,28 @@
 <!-- ── Main entries table ────────────────────────────────────────────── -->
 <section class="entries-section" aria-label="Public figure statements">
   <h2 class="section-heading">IdolCheck</h2>
+
+  <!-- ── Filter bar ─────────────────────────────────────────────────── -->
+  <div id="filter-sentinel"></div>
+  <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter entries">
+    <div class="filter-group" role="group" aria-label="Filter by stance">
+      <span class="filter-label">Stance</span>
+      <button class="filter-btn active" data-filter="stance" data-value="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-filter="stance" data-value="support" aria-pressed="false">Support</button>
+      <button class="filter-btn" data-filter="stance" data-value="opposition" aria-pressed="false">Opposed</button>
+      <button class="filter-btn" data-filter="stance" data-value="neutral" aria-pressed="false">Neutral</button>
+    </div>
+    <div class="filter-group" role="group" aria-label="Filter by role">
+      <span class="filter-label">Role</span>
+      <button class="filter-btn active" data-filter="role" data-value="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-filter="role" data-value="celebrity" aria-pressed="false">Celebrity</button>
+      <button class="filter-btn" data-filter="role" data-value="politician" aria-pressed="false">Politician</button>
+      <button class="filter-btn" data-filter="role" data-value="influencer" aria-pressed="false">Influencer</button>
+      <button class="filter-btn" data-filter="role" data-value="journalist" aria-pressed="false">Journalist</button>
+      <button class="filter-btn" data-filter="role" data-value="other" aria-pressed="false">Other</button>
+    </div>
+  </div>
+
   <div class="table-wrap">
     <table id="entries-table">
       <thead>
