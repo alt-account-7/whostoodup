@@ -89,6 +89,14 @@ a.site-name { text-decoration: none; color: var(--fg); }
 }
 .nav-why:hover { color: var(--fg); }
 
+.nav-twitter {
+  display: flex;
+  align-items: center;
+  color: var(--muted-fg);
+  transition: color 200ms var(--ease);
+}
+.nav-twitter:hover { color: var(--fg); }
+
 /* Primary button — used in nav and footer */
 .btn-cta {
   display: inline-flex;
