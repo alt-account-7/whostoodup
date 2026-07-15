@@ -162,7 +162,7 @@ const whyHtml = readFileSync(r('src/why.html'), 'utf8').replaceAll('<!-- GA4_ID 
 writeFileSync(r('dist/why.html'), whyHtml);
 
 // --- Copy static files ---
-for (const file of ['style.css', 'main.js', 'robots.txt', 'llms.txt']) {
+for (const file of ['style.css', 'main.js', 'robots.txt', 'llms.txt', 'og-image.jpg']) {
   copyFileSync(r('src', file), r('dist', file));
 }
 
