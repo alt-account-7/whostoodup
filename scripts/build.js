@@ -77,6 +77,12 @@ function stanceLabel(stance) {
   return { support: 'SUPPORT', opposition: 'OPPOSED', neutral: 'NEUTRAL' }[stance] ?? stance.toUpperCase();
 }
 
+function renderQuoteCell(entry) {
+  if (!entry.quote) return '<span class="no-quote">Attended / no public statement</span>';
+  if (entry.visit_only) return `<em class="visit-note">${escHtml(entry.quote)}</em>`;
+  return `&ldquo;${escHtml(entry.quote)}&rdquo;`;
+}
+
 // --- Pre-render table rows (SEO) ---
 function renderRows(rows) {
   if (!rows.length) {
@@ -90,7 +96,7 @@ function renderRows(rows) {
       <td class="col-name">${nameHref !== '#' ? `<a href="${escHtml(nameHref)}" target="_blank" rel="noopener noreferrer">${escHtml(e.name)}</a>` : escHtml(e.name)}</td>
       <td class="mono col-role">${escHtml(e.role.toUpperCase())}</td>
       <td class="col-stance"><span class="stance-badge stance-${e.stance}" aria-label="${stanceLabel(e.stance)}">${stanceLabel(e.stance)}</span></td>
-      <td class="col-quote">${e.quote ? `&ldquo;${escHtml(e.quote)}&rdquo;` : '<span class="no-quote">Attended / no public statement</span>'}</td>
+      <td class="col-quote">${renderQuoteCell(e)}</td>
       <td class="col-source"><a href="${escHtml(safeUrl(e.source_url))}" target="_blank" rel="noopener noreferrer" class="source-link mono" data-entry="${escHtml(e.name)}">SOURCE ↗</a></td>
     </tr>`;
   }).join('\n');

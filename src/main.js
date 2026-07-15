@@ -208,6 +208,12 @@
       });
   }
 
+  function renderQuoteCell(e) {
+    if (!e.quote) return '<span class="no-quote">Attended / no public statement</span>';
+    if (e.visit_only) return `<em class="visit-note">${escHtml(e.quote)}</em>`;
+    return `&ldquo;${escHtml(e.quote)}&rdquo;`;
+  }
+
   function renderRow(e) {
     const nameHref = safeUrl(e.wiki_url);
     const nameEl = nameHref !== '#'
@@ -218,7 +224,7 @@
       <td class="col-name">${nameEl}</td>
       <td class="mono col-role">${escHtml(e.role.toUpperCase())}</td>
       <td class="col-stance"><span class="stance-badge stance-${e.stance}">${stanceLabel(e.stance)}</span></td>
-      <td class="col-quote">${e.quote ? `&ldquo;${escHtml(e.quote)}&rdquo;` : '<span class="no-quote">Attended / no public statement</span>'}</td>
+      <td class="col-quote">${renderQuoteCell(e)}</td>
       <td class="col-source"><a href="${escHtml(safeUrl(e.source_url))}" target="_blank" rel="noopener noreferrer" class="source-link mono" data-entry="${escHtml(e.name)}">SOURCE ↗</a></td>
     </tr>`;
   }
