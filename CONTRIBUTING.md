@@ -4,7 +4,23 @@ There are two ways to contribute: submitting entries and moderating PRs.
 
 ---
 
-## Submitting an entry
+## Not comfortable with GitHub? Tweet it to us
+
+If you're not familiar with GitHub, you can tweet your submission to **[@WhoStoodUp](https://x.com/WhoStoodUp)** and we'll add it ourselves.
+
+Include in your tweet:
+- **Name** of the public figure
+- **Role** — celebrity / politician / influencer / journalist / other
+- **Stance** — support / opposition / neutral
+- **Quote** — verbatim, exactly what they said
+- **Source link** — a public URL where the statement can be verified
+- **Date** they said it (approximate is fine)
+
+We review all tweets and add verified entries manually. No GitHub account needed.
+
+---
+
+## Submitting an entry via GitHub
 
 ### Who qualifies as a public figure?
 

@@ -5,7 +5,6 @@
   "site_description": "Tracking which celebrities and politicians have publicly commented on Sonam Wangchuk's hunger strike demanding the resignation of Education Minister Dharmendra Pradhan over competitive exam paper leaks and student suicides.",
   "base_url": "https://whostoodup.pages.dev",
   "github_repo": "https://github.com/alt-account-7/whostoodup",
-  "bmc_url": "https://buymeacoffee.com/whostoodup",
   "ticker_window_hours": 48,
   "ticker_max_entries": 20,
   "ga4_id": "G-H0QJ6412GG"

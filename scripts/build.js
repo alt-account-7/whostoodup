@@ -131,8 +131,7 @@ function buildJsonLd() {
 
 // --- Meta tag content ---
 function metaTitle() {
-  const dayN = Math.max(1, Math.floor((Date.now() - new Date(config.strike_start_date + 'T00:00:00+05:30').getTime()) / 86400000) + 1);
-  return `Day ${dayN}: WhoStoodUp — Who's speaking on Wangchuk's fast for exam justice`;
+  return `WhoStoodUp — Which celebrities and politicians are speaking on Sonam Wangchuk's hunger strike`;
 }
 
 function metaDescription() {
@@ -183,6 +182,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <loc>${config.base_url}/why.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <lastmod>${generatedAt.split('T')[0]}</lastmod>
   </url>
 </urlset>`;
 writeFileSync(r('dist/sitemap.xml'), sitemap);

@@ -2,13 +2,27 @@
 
 A crowdsourced, publicly-sourced tracker of which celebrities and politicians have commented on **Sonam Wangchuk's hunger strike** and the Citizens for Justice and Peace (CJP) protest.
 
-Live at: **https://whostoodup.pages.dev**
+Live at: **https://whostoodup.pages.dev** · Follow: **[@WhoStoodUp](https://x.com/WhoStoodUp)**
 
 ---
 
 ## Contribute — submit an entry
 
-Found a public statement by a celebrity or politician? Open a PR.
+### Not on GitHub? Tweet it to us
+
+Tweet your submission to **[@WhoStoodUp](https://x.com/WhoStoodUp)** and we'll add it ourselves. Include:
+- Name of the public figure
+- Role (celebrity / politician / influencer / journalist / other)
+- Stance (support / opposition / neutral)
+- The verbatim quote (or note if they attended/visited but made no statement)
+- A public source link
+- Date they said it
+
+No GitHub account needed. We review all tweets and add verified entries manually.
+
+### Via GitHub Pull Request
+
+Found a public statement? Open a PR.
 
 1. Fork this repo
 2. Add one file under `data/entries/` using the naming format:
@@ -24,7 +38,6 @@ Found a public statement by a celebrity or politician? Open a PR.
      "role": "celebrity",
      "wiki_url": "https://en.wikipedia.org/wiki/...",
      "stance": "support",
-     "target": "both",
      "quote": "Exact verbatim quote here.",
      "timestamp": "2026-07-14 14:30",
      "source_url": "https://..."
@@ -32,17 +45,16 @@ Found a public statement by a celebrity or politician? Open a PR.
    ```
 
    **Field values:**
-   - `role`: `celebrity` | `politician` | `other`
-   - `stance`: `support` | `opposition` | `concern` | `neutral`
-   - `target`: `person` (Wangchuk personally) | `demands` (the CJP political demands) | `both`
+   - `role`: `celebrity` | `politician` | `influencer` | `journalist` | `other`
+   - `stance`: `support` | `opposition` | `neutral`
    - `timestamp`: statement date/time in IST (`YYYY-MM-DD HH:MM`) — when they *said* it, not when you're submitting
-   - `quote`: verbatim, not paraphrased. Required.
+   - `quote`: verbatim, not paraphrased. Omit entirely if the person attended/visited but made no public statement.
    - `source_url`: publicly accessible URL. Required.
    - `wiki_url`: Wikipedia or public profile link. Optional but highly recommended.
 
 4. Open a PR. CI runs automatically and checks for schema errors, unreachable URLs, and likely duplicates. A maintainer will review and merge.
 
-**Rules:** One file per PR. Direct quote + source required. No paraphrasing.
+**Rules:** One file per PR. Source link required. No paraphrasing.
 
 ---
 
@@ -57,9 +69,8 @@ Maintainer role: review PRs for accurate quoting, valid sources, and duplicates.
 ## What's tracked
 
 - **`name`** — the public figure
-- **`stance`** — support / opposition / concern / neutral comment
-- **`target`** — whether the statement addresses Wangchuk personally, the CJP's political demands, or both
-- **`quote`** — verbatim, sourced
+- **`stance`** — support / opposition / neutral
+- **`quote`** — verbatim, sourced (optional if visited without a public statement)
 - **`timestamp`** — when they said it (IST)
 
 ---
