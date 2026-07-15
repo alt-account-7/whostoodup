@@ -93,34 +93,6 @@
   </div>
 </section>
 
-<!-- ── Entry ticker (dark strip) ─────────────────────────────────────── -->
-<div class="ticker-strip" role="marquee" aria-label="Recent entries" aria-atomic="false">
-  <div class="ticker-inner" id="entry-ticker" aria-hidden="true">
-    <!-- Populated by main.js -->
-  </div>
-</div>
-
-<!-- ── Summary strip (muted gray) ───────────────────────────────────── -->
-<section class="summary-strip" aria-label="Statement counts">
-  <div class="summary-inner">
-    <div class="summary-count stance-support">
-      <span class="num" id="support-count"><!-- SUPPORT_COUNT --></span>
-      <span class="lbl">Support</span>
-    </div>
-    <div class="summary-count stance-opposition">
-      <span class="num" id="opposition-count"><!-- OPPOSITION_COUNT --></span>
-      <span class="lbl">Opposed</span>
-    </div>
-    <div class="summary-count stance-total">
-      <span class="num" id="total-count"><!-- TOTAL_COUNT --></span>
-      <span class="lbl">Total</span>
-    </div>
-    <div class="sparkline-wrap" aria-hidden="true">
-      <svg id="sparkline" class="sparkline" aria-hidden="true" focusable="false"></svg>
-    </div>
-  </div>
-</section>
-
 <!-- ── Quote ticker (blue-50 tint) ──────────────────────────────────── -->
 <div class="quote-ticker" aria-label="Quote">
   <blockquote class="quote-text" id="quote-text">
@@ -129,9 +101,35 @@
   </blockquote>
 </div>
 
+<!-- ── Entry ticker (dark strip) ─────────────────────────────────────── -->
+<div class="ticker-strip" role="marquee" aria-label="Recent entries" aria-atomic="false">
+  <div class="ticker-inner" id="entry-ticker" aria-hidden="true">
+    <!-- Populated by main.js -->
+  </div>
+</div>
+
 <!-- ── Main entries table ────────────────────────────────────────────── -->
 <section class="entries-section" aria-label="Public figure statements">
-  <h2 class="section-heading">IdolCheck</h2>
+  <div class="section-header" aria-label="Statement counts">
+    <h2 class="section-heading">IdolCheck</h2>
+    <div class="summary-counts">
+      <div class="summary-count stance-support">
+        <span class="num" id="support-count"><!-- SUPPORT_COUNT --></span>
+        <span class="lbl">Support</span>
+      </div>
+      <div class="summary-count stance-opposition">
+        <span class="num" id="opposition-count"><!-- OPPOSITION_COUNT --></span>
+        <span class="lbl">Opposed</span>
+      </div>
+      <div class="summary-count stance-total">
+        <span class="num" id="total-count"><!-- TOTAL_COUNT --></span>
+        <span class="lbl">Total</span>
+      </div>
+      <div class="sparkline-wrap" aria-hidden="true">
+        <svg id="sparkline" class="sparkline" aria-hidden="true" focusable="false"></svg>
+      </div>
+    </div>
+  </div>
 
   <!-- ── Filter bar ─────────────────────────────────────────────────── -->
   <div id="filter-sentinel"></div>
