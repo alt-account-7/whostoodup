@@ -6,7 +6,9 @@ import { join } from 'path';
 const ROOT = new URL('../..', import.meta.url).pathname;
 const ENTRIES_DIR = join(ROOT, 'data/entries');
 const DIST_DIR = join(ROOT, 'dist');
+const CONFIG_PATH = join(ROOT, 'data/config.json');
 const TEST_FILES = [];
+const TEST_GA4_ID = 'G-TESTMEASUREMENT1';
 
 const baseEntry = {
   schema_version: '1',
@@ -28,6 +30,25 @@ function writeTestEntry(name, content) {
 
 function runBuild() {
   execSync('node scripts/build.js', { cwd: ROOT, stdio: 'pipe' });
+}
+
+function withTestGa4Id(fn) {
+  const original = readFileSync(CONFIG_PATH, 'utf8');
+  try {
+    const config = JSON.parse(original);
+    config.ga4_id = TEST_GA4_ID;
+    writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2) + '\n');
+    fn();
+  } finally {
+    writeFileSync(CONFIG_PATH, original);
+  }
+}
+
+function assertGa4InHtml(html, id) {
+  expect(html).toContain(`gtag/js?id=${id}`);
+  expect(html).toContain(`gtag('config', '${id}')`);
+  expect(html).not.toContain('G-XXXXXXXXXX');
+  expect(html).not.toContain('<!-- GA4_ID -->');
 }
 
 beforeAll(() => {
@@ -115,5 +136,25 @@ describe('build script', () => {
     const html = readFileSync(join(DIST_DIR, 'index.html'), 'utf8');
     expect(html).not.toContain('<script>alert(1)</script>');
     expect(html).toContain('&lt;script&gt;');
+  });
+
+  it('injects ga4_id from config.json into index.html and why.html', () => {
+    withTestGa4Id(() => {
+      runBuild();
+      assertGa4InHtml(readFileSync(join(DIST_DIR, 'index.html'), 'utf8'), TEST_GA4_ID);
+      assertGa4InHtml(readFileSync(join(DIST_DIR, 'why.html'), 'utf8'), TEST_GA4_ID);
+    });
+  });
+
+  it('keeps embedded config ga4_id in sync with gtag script in index.html', () => {
+    withTestGa4Id(() => {
+      runBuild();
+      const html = readFileSync(join(DIST_DIR, 'index.html'), 'utf8');
+      const match = html.match(/<script id="config-data"[^>]*>([\s\S]*?)<\/script>/);
+      expect(match).toBeTruthy();
+      const embedded = JSON.parse(match[1]);
+      expect(embedded.ga4_id).toBe(TEST_GA4_ID);
+      expect(html).toContain(`gtag/js?id=${embedded.ga4_id}`);
+    });
   });
 });

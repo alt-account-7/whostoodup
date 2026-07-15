@@ -31,13 +31,13 @@
   <!-- JSON-LD structured data -->
   <script type="application/ld+json"><!-- JSON_LD --></script>
 
-  <!-- GA4 — replace G-XXXXXXXXXX with real measurement ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- GA4 — injected from config.json at build time -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<!-- GA4_ID -->"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', '<!-- GA4_ID -->');
   </script>
 
   <!-- Embedded data for client-side JS -->

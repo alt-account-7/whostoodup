@@ -135,10 +135,11 @@ function metaDescription() {
 
 // --- Build index.html ---
 const template = readFileSync(r('src/index.html'), 'utf8');
-// replaceAll: some markers (META_TITLE, META_DESCRIPTION) appear multiple times (title + OG tags).
+// replaceAll: some markers (META_TITLE, META_DESCRIPTION, GA4_ID) appear multiple times.
 const indexHtml = template
   .replaceAll('<!-- META_TITLE -->', escHtml(metaTitle()))
   .replaceAll('<!-- META_DESCRIPTION -->', escHtml(metaDescription()))
+  .replaceAll('<!-- GA4_ID -->', config.ga4_id)
   .replace('<!-- JSON_LD -->', buildJsonLd())
   .replace('<!-- CONFIG_JSON -->', safeJson(config))
   .replace('<!-- QUOTES_JSON -->', safeJson(quotes))
@@ -151,8 +152,12 @@ const indexHtml = template
 
 writeFileSync(r('dist/index.html'), indexHtml);
 
+// --- Build why.html (GA4 marker injection; other static assets copied as-is) ---
+const whyHtml = readFileSync(r('src/why.html'), 'utf8').replaceAll('<!-- GA4_ID -->', config.ga4_id);
+writeFileSync(r('dist/why.html'), whyHtml);
+
 // --- Copy static files ---
-for (const file of ['why.html', 'style.css', 'main.js', 'robots.txt', 'llms.txt']) {
+for (const file of ['style.css', 'main.js', 'robots.txt', 'llms.txt']) {
   copyFileSync(r('src', file), r('dist', file));
 }
 
