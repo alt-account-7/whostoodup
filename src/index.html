@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><!-- META_TITLE --></title>
+  <meta name="description" content="<!-- META_DESCRIPTION -->">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<!-- META_TITLE -->">
+  <meta property="og:description" content="<!-- META_DESCRIPTION -->">
+  <meta property="og:url" content="https://whostoodup.pages.dev/">
+  <meta property="og:site_name" content="WhoStoodUp">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="<!-- META_TITLE -->">
+  <meta name="twitter:description" content="<!-- META_DESCRIPTION -->">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://whostoodup.pages.dev/">
+
+  <!-- Fonts: Outfit (geometric sans — headings, body, labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json"><!-- JSON_LD --></script>
+
+  <!-- GA4 — replace G-XXXXXXXXXX with real measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Embedded data for client-side JS -->
+  <script id="config-data" type="application/json"><!-- CONFIG_JSON --></script>
+  <script id="quotes-data" type="application/json"><!-- QUOTES_JSON --></script>
+  <script id="entries-data" type="application/json"><!-- ENTRIES_JSON --></script>
+  <span id="generated-at" hidden><!-- GENERATED_AT --></span>
+</head>
+<body>
+
+<!-- ── Nav (sticky, white) ────────────────────────────────────────────── -->
+<nav class="site-nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <span class="site-name">WhoStoodUp</span>
+    <div class="nav-links">
+      <a href="why.html" class="nav-why">Why →</a>
+      <a href="https://github.com/alt-account-7/whostoodup/compare" class="btn-cta" target="_blank" rel="noopener noreferrer">Contribute</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero (full-width blue block) ──────────────────────────────────── -->
+<section class="hero-section" aria-label="Hunger strike duration">
+  <div class="hero-content">
+    <div class="hero-meta">
+      <span class="hero-tag">Hunger Strike Tracker</span>
+      <div class="live-indicator" aria-label="Live tracker">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span class="live-label">LIVE</span>
+      </div>
+    </div>
+    <div class="hero-body">
+      <div class="hero-left">
+        <div class="day-counter">
+          <span class="day-label">DAY</span>
+          <span class="day-number" id="day-n" aria-live="polite">…</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <p class="hero-context">
+          Sonam Wangchuk — climate activist and engineer — has been on an indefinite hunger strike
+          at <strong>Jantar Mantar, New Delhi</strong> since <strong>28 June 2026</strong>, demanding
+          the resignation of Education Minister Dharmendra Pradhan over competitive exam paper leaks
+          and student suicides.
+        </p>
+        <p class="hero-context">
+          WhoStoodUp is a crowdsourced, verbatim record of every celebrity and politician who has
+          publicly commented. Support and opposition both tracked — every claim sourced.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Entry ticker (dark strip) ─────────────────────────────────────── -->
+<div class="ticker-strip" role="marquee" aria-label="Recent entries" aria-atomic="false">
+  <div class="ticker-inner" id="entry-ticker" aria-hidden="true">
+    <!-- Populated by main.js -->
+  </div>
+</div>
+
+<!-- ── Summary strip (muted gray) ───────────────────────────────────── -->
+<section class="summary-strip" aria-label="Statement counts">
+  <div class="summary-inner">
+    <div class="summary-count stance-support">
+      <span class="num" id="support-count"><!-- SUPPORT_COUNT --></span>
+      <span class="lbl">Support</span>
+    </div>
+    <div class="summary-count stance-opposition">
+      <span class="num" id="opposition-count"><!-- OPPOSITION_COUNT --></span>
+      <span class="lbl">Opposed</span>
+    </div>
+    <div class="summary-count stance-total">
+      <span class="num" id="total-count"><!-- TOTAL_COUNT --></span>
+      <span class="lbl">Total</span>
+    </div>
+    <div class="sparkline-wrap" aria-hidden="true">
+      <svg id="sparkline" class="sparkline" aria-hidden="true" focusable="false"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── Filter bar (sticky below nav) ─────────────────────────────────── -->
+<div id="filter-sentinel"></div>
+<div class="filter-bar" id="filter-bar" role="group" aria-label="Filter entries">
+  <div class="filter-group" role="group" aria-label="Filter by stance">
+    <span class="filter-label">Stance</span>
+    <button class="filter-btn active" data-filter="stance" data-value="all" aria-pressed="true">All</button>
+    <button class="filter-btn" data-filter="stance" data-value="support" aria-pressed="false">Support</button>
+    <button class="filter-btn" data-filter="stance" data-value="opposition" aria-pressed="false">Opposed</button>
+    <button class="filter-btn" data-filter="stance" data-value="neutral" aria-pressed="false">Neutral</button>
+  </div>
+  <div class="filter-group" role="group" aria-label="Filter by role">
+    <span class="filter-label">Role</span>
+    <button class="filter-btn active" data-filter="role" data-value="all" aria-pressed="true">All</button>
+    <button class="filter-btn" data-filter="role" data-value="celebrity" aria-pressed="false">Celebrity</button>
+    <button class="filter-btn" data-filter="role" data-value="politician" aria-pressed="false">Politician</button>
+    <button class="filter-btn" data-filter="role" data-value="influencer" aria-pressed="false">Influencer</button>
+    <button class="filter-btn" data-filter="role" data-value="journalist" aria-pressed="false">Journalist</button>
+    <button class="filter-btn" data-filter="role" data-value="other" aria-pressed="false">Other</button>
+  </div>
+
+</div>
+
+<!-- ── Quote ticker (blue-50 tint) ──────────────────────────────────── -->
+<div class="quote-ticker" aria-label="Quote">
+  <blockquote class="quote-text" id="quote-text">
+    <span class="quote-body" id="quote-body"></span>
+    <cite class="quote-attr" id="quote-attr"></cite>
+  </blockquote>
+</div>
+
+<!-- ── Main entries table ────────────────────────────────────────────── -->
+<section class="entries-section" aria-label="Public figure statements">
+  <h2 class="section-heading">IdolCheck</h2>
+  <div class="table-wrap">
+    <table id="entries-table">
+      <thead>
+        <tr>
+          <th scope="col">
+            <button class="sort-btn" data-sort="timestamp" aria-label="Sort by date">
+              Date <span class="sort-indicator" aria-hidden="true">↓</span>
+            </button>
+          </th>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">
+            <button class="sort-btn" data-sort="stance" aria-label="Sort by stance">
+              Stance <span class="sort-indicator" aria-hidden="true"></span>
+            </button>
+          </th>
+          <th scope="col">Quote</th>
+          <th scope="col">Source</th>
+        </tr>
+      </thead>
+      <tbody id="entries-tbody">
+        <!-- Pre-rendered for SEO crawlers; replaced by main.js on load -->
+        <!-- ENTRIES_TABLE -->
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination" id="pagination" aria-live="polite"></div>
+</section>
+
+<!-- ── Footer (dark) ─────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <span class="last-synced" id="last-synced">Last synced: …</span>
+      <div class="footer-links">
+        <a href="https://github.com/alt-account-7/whostoodup/compare" class="footer-cta footer-cta-primary" target="_blank" rel="noopener noreferrer">Contribute via GitHub PR</a>
+      </div>
+    </div>
+    <p class="footer-disclaimer">
+      All entries are sourced public statements with direct quotes and verifiable links.
+      Support and opposition are tracked with equal rigour. No unsourced claims, no paraphrasing.
+      <a href="why.html">Why this site exists →</a>
+    </p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

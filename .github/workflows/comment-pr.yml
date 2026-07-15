@@ -1,0 +1,71 @@
+# Posts the CI validation result as a PR comment.
+# Triggered by workflow_run so it has write access WITHOUT running untrusted PR code.
+# The PR code (validate-pr.yml) runs with zero secret access; this workflow only
+# reads the artifact it produced and posts a comment.
+name: Comment on PR
+
+on:
+  workflow_run:
+    workflows: ["Validate PR"]
+    types: [completed]
+
+# Only needs to write PR comments — nothing else.
+permissions:
+  pull-requests: write
+  actions: read        # needed to download artifacts from the triggering run
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download validation artifact
+        # PIN TO SHA before going live.
+        uses: actions/download-artifact@v4
+        with:
+          name: validation-result
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Post comment
+        # PIN TO SHA before going live.
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const prNumber = parseInt(fs.readFileSync('pr-number.txt', 'utf8').trim(), 10);
+            const body = fs.readFileSync('validation-result.md', 'utf8');
+
+            if (!prNumber || isNaN(prNumber)) {
+              core.warning('Could not read PR number from artifact — skipping comment.');
+              return;
+            }
+
+            // Find and update existing bot comment if present, else create new one.
+            const marker = '<!-- whostoodup-ci-comment -->';
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+
+            const existing = comments.find(c =>
+              c.user.type === 'Bot' && c.body.includes(marker)
+            );
+
+            const fullBody = marker + '\n' + body;
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: fullBody,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: fullBody,
+              });
+            }

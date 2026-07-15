@@ -1,0 +1,74 @@
+# Validates new entry files on PRs. Runs with NO secret access (pull_request trigger).
+# Posts nothing itself — uploads artifact for comment-pr.yml to use.
+# SECURITY: never change this trigger to pull_request_target without careful review.
+name: Validate PR
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/entries/**'
+
+# Minimum permissions — this workflow never writes anything.
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # PIN THESE TO SHAs BEFORE GOING LIVE.
+      # Run: gh api repos/actions/checkout/commits/v4 --jq .sha
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get changed entry files
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff --name-only --diff-filter=A origin/${{ github.base_ref }}...HEAD > changed-files.txt
+          echo "Changed files:"
+          cat changed-files.txt
+
+      - name: Save PR number
+        run: echo "${{ github.event.pull_request.number }}" > pr-number.txt
+
+      - name: Validate entries
+        id: validate
+        run: node scripts/ci-validate-pr.js
+        # Exit 1 on errors; CI status blocks merge until maintainer reviews.
+        # validation-result.md is always written (pass or fail).
+
+      - name: Upload validation result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-result
+          path: |
+            validation-result.md
+            pr-number.txt
+          retention-days: 7
+
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan for secrets (gitleaks)
+        # PIN TO SHA before going live.
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}

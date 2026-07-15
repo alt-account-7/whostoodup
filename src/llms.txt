@@ -1,0 +1,37 @@
+# WhoStoodUp
+
+> Tracking which celebrities and politicians have publicly commented on Sonam Wangchuk's hunger strike demanding Education Minister Dharmendra Pradhan's resignation.
+
+## What this site is
+
+A crowdsourced, statically-built tracker of public statements by notable Indian public figures on Sonam Wangchuk's indefinite hunger strike at Jantar Mantar, New Delhi (started 2026-06-28), demanding the resignation of Education Minister Dharmendra Pradhan over competitive exam paper leaks and student suicides.
+
+All entries are contributed via GitHub Pull Request with mandatory verbatim quotes and public source links. Support and opposition are tracked with equal rigour. No unsourced claims, no paraphrasing.
+
+## Machine-readable data
+
+Full entries dataset: https://whostoodup.pages.dev/entries.json
+Schema version field: `schema_version` (breaking changes bump this)
+Format: JSON object with `generated_at` (ISO 8601 UTC) and `entries` array
+
+## Entry schema
+
+Each entry in the `entries` array:
+
+| Field        | Type   | Values / Notes |
+|--------------|--------|----------------|
+| `name`       | string | Public figure's full name |
+| `role`       | enum   | `celebrity` \| `politician` \| `influencer` \| `journalist` \| `other` |
+| `wiki_url`   | string | Wikipedia or public profile URL (optional) |
+| `stance`     | enum   | `support` \| `opposition` \| `neutral` |
+| `quote`      | string | Verbatim direct quote (optional — omit if visited but no public statement) |
+| `timestamp`  | string | `YYYY-MM-DD HH:MM` in IST (UTC+5:30) |
+| `source_url` | string | Publicly accessible URL, required |
+
+## Neutrality
+
+This is not an advocacy site. Support and opposition are tracked identically. Entries must reference what the person actually said — not editorial interpretation.
+
+## Contributing
+
+All writes via GitHub PR: https://github.com/alt-account-7/whostoodup

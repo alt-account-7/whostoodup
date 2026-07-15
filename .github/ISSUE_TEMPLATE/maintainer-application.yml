@@ -1,0 +1,38 @@
+name: Maintainer Application
+description: Apply to help review and moderate incoming entry PRs
+title: "[MAINTAINER APPLICATION]"
+labels: ["maintainer-application"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for wanting to help! Maintainers review incoming PRs for source accuracy,
+        verbatim quoting, and duplicates. No coding required.
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why do you want to help moderate?
+      description: A sentence or two is fine.
+    validations:
+      required: true
+
+  - type: textarea
+    id: availability
+    attributes:
+      label: Availability
+      description: Rough idea of how often you can review PRs.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: understanding
+    attributes:
+      label: I understand that
+      options:
+        - label: Maintainers do not advocate — both support and opposition entries are merged if properly sourced.
+          required: true
+        - label: Every entry needs a verbatim quote + working source link.
+          required: true
+        - label: The final merge decision is mine to make after CI validation.
+          required: true
