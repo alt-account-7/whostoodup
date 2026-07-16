@@ -1,6 +1,6 @@
 # WhoStoodUp
 
-A crowdsourced, publicly-sourced tracker of which celebrities and politicians have commented on **Sonam Wangchuk's hunger strike** and the Citizens for Justice and Peace (CJP) protest.
+A crowdsourced, publicly-sourced tracker of which celebrities and politicians have commented on **Sonam Wangchuk's hunger strike** and the Cockroach Janta Party (CJP) protest.
 
 Live at: **https://whostoodup.pages.dev** · Follow: **[@WhoStoodUp](https://x.com/WhoStoodUp)**
 
