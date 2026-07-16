@@ -91,8 +91,8 @@ for (const filePath of changedEntryFiles) {
     if (!entry.quote.match(/[.!?"।]/)) {
       result.warnings.push('Quote may be incomplete — no sentence-ending punctuation found');
     }
-    if (entry.quote.length > 1000) {
-      result.warnings.push('Quote is very long (>1000 chars) — consider using the most relevant excerpt');
+    if (entry.quote.length > 1500) {
+      result.warnings.push('Quote is very long (>1500 chars) — consider using the most relevant excerpt');
     }
     if (/\b(paraphrase|summary|gist)\b/i.test(entry.quote)) {
       result.warnings.push('Quote contains paraphrase indicators — ensure this is verbatim');
