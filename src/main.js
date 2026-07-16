@@ -197,7 +197,7 @@
         if (filter.role !== 'all' && e.role !== filter.role) return false;
         if (filter.search) {
           const q = filter.search.toLowerCase();
-          if (!e.name.toLowerCase().includes(q) && !(e.quote ?? '').toLowerCase().includes(q)) return false;
+          if (!e.name.toLowerCase().includes(q)) return false;
         }
         return true;
       })

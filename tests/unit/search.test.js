@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest';
 function matchesSearch(entry, query) {
   if (!query) return true;
   const q = query.toLowerCase();
-  return entry.name.toLowerCase().includes(q) || (entry.quote ?? '').toLowerCase().includes(q);
+  return entry.name.toLowerCase().includes(q);
 }
 
 const entries = [
@@ -25,21 +25,20 @@ describe('search filter', () => {
     expect(results[0].name).toBe('Swara Bhasker');
   });
 
-  it('matches by quote text', () => {
+  it('does not match by quote text', () => {
     const results = entries.filter(e => matchesSearch(e, 'solidarity'));
-    expect(results).toHaveLength(1);
-    expect(results[0].name).toBe('Swara Bhasker');
+    expect(results).toHaveLength(0);
   });
 
   it('is case-insensitive', () => {
     expect(entries.filter(e => matchesSearch(e, 'PRADHAN'))).toHaveLength(1);
   });
 
-  it('matches partial strings', () => {
+  it('matches partial name strings', () => {
     expect(entries.filter(e => matchesSearch(e, 'Shah'))).toHaveLength(1);
   });
 
-  it('handles entries without a quote', () => {
+  it('matches name of entry without a quote', () => {
     const results = entries.filter(e => matchesSearch(e, 'visited'));
     expect(results).toHaveLength(1);
     expect(results[0].name).toBe('Visited only');
