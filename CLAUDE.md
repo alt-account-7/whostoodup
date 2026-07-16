@@ -1,6 +1,6 @@
 # WhoStoodUp — Claude Code context
 
-Static site tracking public figures' statements on Sonam Wangchuk's hunger strike and the CJP protest. Crowdsourced via GitHub PRs. Deployed on Cloudflare Pages.
+Static site tracking public figures' statements on Sonam Wangchuk's hunger strike and the Cockroach Janta Party (CJP) protest. Crowdsourced via GitHub PRs. Deployed on Cloudflare Pages.
 
 ## Architecture
 
