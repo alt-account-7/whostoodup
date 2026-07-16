@@ -188,7 +188,7 @@
   const filter = { stance: 'all', role: 'all', search: '' };
   const sort = { key: 'timestamp', dir: 'asc' };
   let page = 1;
-  const PAGE_SIZE = 50;
+  const PAGE_SIZE = 25;
 
   function filtered() {
     return entries
