@@ -376,6 +376,22 @@ a.site-name { text-decoration: none; color: var(--fg); }
   flex-wrap: wrap;
 }
 
+.filter-search { display: flex; align-items: center; }
+#entry-search {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--muted);
+  color: var(--fg);
+  width: 14rem;
+  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+  outline: none;
+}
+#entry-search:focus { border-color: var(--primary); background: var(--bg); }
+#entry-search::placeholder { color: var(--muted-fg); }
+
 .filter-label {
   font-size: 0.6rem;
   font-weight: 700;

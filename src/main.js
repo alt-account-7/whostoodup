@@ -185,7 +185,7 @@
   }
 
   // ── Filter + sort + pagination state ────────────────────────────────────
-  const filter = { stance: 'all', role: 'all' };
+  const filter = { stance: 'all', role: 'all', search: '' };
   const sort = { key: 'timestamp', dir: 'asc' };
   let page = 1;
   const PAGE_SIZE = 50;
@@ -195,6 +195,10 @@
       .filter(e => {
         if (filter.stance !== 'all' && e.stance !== filter.stance) return false;
         if (filter.role !== 'all' && e.role !== filter.role) return false;
+        if (filter.search) {
+          const q = filter.search.toLowerCase();
+          if (!e.name.toLowerCase().includes(q) && !(e.quote ?? '').toLowerCase().includes(q)) return false;
+        }
         return true;
       })
       .sort((a, b) => {
@@ -269,6 +273,11 @@
       btn.addEventListener('click', () => {
         const { filter: f, value: v } = btn.dataset;
         filter[f] = v;
+        if (v === 'all') {
+          filter.search = '';
+          const si = document.getElementById('entry-search');
+          if (si) si.value = '';
+        }
         page = 1;
         document.querySelectorAll(`.filter-btn[data-filter="${f}"]`).forEach(b => {
           b.classList.toggle('active', b.dataset.value === v);
@@ -277,6 +286,15 @@
         track('filter_used', { filter_type: f, filter_value: v });
       });
     });
+
+    const searchInput = document.getElementById('entry-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        filter.search = searchInput.value.trim();
+        page = 1;
+        renderTable();
+      });
+    }
 
     // Sticky observer
     const sentinel = document.getElementById('filter-sentinel');
