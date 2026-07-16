@@ -212,10 +212,15 @@
       });
   }
 
+  const QUOTE_TRUNCATE = 200;
+
   function renderQuoteCell(e) {
     if (!e.quote) return '<span class="no-quote">Attended / no public statement</span>';
     if (e.visit_only) return `<em class="visit-note">${escHtml(e.quote)}</em>`;
-    return `&ldquo;${escHtml(e.quote)}&rdquo;`;
+    if (e.quote.length <= QUOTE_TRUNCATE) return `&ldquo;${escHtml(e.quote)}&rdquo;`;
+    const short = escHtml(e.quote.slice(0, QUOTE_TRUNCATE).trimEnd());
+    const full = escHtml(e.quote);
+    return `<span class="quote-truncated">&ldquo;<span class="quote-short">${short}&hellip;</span><span class="quote-full" hidden>${full}</span>&rdquo; <button class="expand-btn" aria-expanded="false">show more</button></span>`;
   }
 
   function renderRow(e) {
@@ -326,11 +331,21 @@
     });
   }
 
-  // ── Source link tracking ─────────────────────────────────────────────────
+  // ── Source link tracking + quote expand ─────────────────────────────────
   function initTracking() {
     document.addEventListener('click', e => {
       const link = e.target.closest('.source-link');
       if (link) track('source_link_click', { entry_name: link.dataset.entry });
+
+      const btn = e.target.closest('.expand-btn');
+      if (btn) {
+        const wrap = btn.closest('.quote-truncated');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        wrap.querySelector('.quote-short').hidden = !expanded;
+        wrap.querySelector('.quote-full').hidden = expanded;
+        btn.setAttribute('aria-expanded', String(!expanded));
+        btn.textContent = expanded ? 'show more' : 'show less';
+      }
     });
   }
 
