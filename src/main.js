@@ -335,13 +335,25 @@
   }
 
   // ── Last synced display ───────────────────────────────────────────────────
+  function syncedAgo(d) {
+    const diffMs = Date.now() - d.getTime();
+    const diffSec = Math.floor(diffMs / 1000);
+    if (diffSec < 60) return `${diffSec}s ago`;
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return `${diffMin}m ago`;
+    const diffH = Math.floor(diffMin / 60);
+    if (diffH < 24) return `${diffH}h ago`;
+    return `${Math.floor(diffH / 24)}d ago`;
+  }
+
   function updateLastSynced() {
     const el = document.getElementById('last-synced');
     const genEl = document.getElementById('generated-at');
     if (!el || !genEl) return;
     try {
       const d = new Date(genEl.textContent.trim());
-      el.textContent = 'Last synced: ' + d.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST';
+      const ts = d.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST';
+      el.innerHTML = 'Last updated at ' + ts + ' <span class="synced-ago">(' + syncedAgo(d) + ')</span>';
     } catch { /* noop */ }
   }
 

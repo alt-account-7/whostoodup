@@ -709,6 +709,12 @@ a.site-name { text-decoration: none; color: var(--fg); }
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.3);
 }
+.synced-ago {
+  color: var(--accent);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 500;
+}
 
 .footer-disclaimer {
   font-size: 0.72rem;
