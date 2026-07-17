@@ -2,15 +2,19 @@
 
 A crowdsourced, publicly-sourced tracker of which celebrities and politicians have commented on **Sonam Wangchuk's hunger strike** and the Cockroach Janta Party (CJP) protest.
 
-Live at: **https://whostoodup.pages.dev** · Follow: **[@WhoStoodUp](https://x.com/WhoStoodUp)**
+Live at: **https://whostoodup.pages.dev** · Follow: **[@WhoStoodUp](https://x.com/WhoStoodUp)** · **[@whostoodup](https://www.instagram.com/whostoodup/)** on Instagram
 
 ---
 
 ## Contribute — submit an entry
 
-### Not on GitHub? Tweet it to us
+### Not on GitHub? Send it on X or Instagram
 
-Tweet your submission to **[@WhoStoodUp](https://x.com/WhoStoodUp)** and we'll add it ourselves. Include:
+**X:** Tweet your submission to **[@WhoStoodUp](https://x.com/WhoStoodUp)**.
+
+**Instagram:** Tag **[@whostoodup](https://www.instagram.com/whostoodup/)** in a story, or [DM us](https://www.instagram.com/whostoodup/) there.
+
+Include:
 - Name of the public figure
 - Role (celebrity / politician / influencer / journalist / other)
 - Stance (support / opposition / neutral)
@@ -18,7 +22,7 @@ Tweet your submission to **[@WhoStoodUp](https://x.com/WhoStoodUp)** and we'll a
 - A public source link
 - Date they said it
 
-No GitHub account needed. We review all tweets and add verified entries manually.
+No GitHub account needed. We review submissions and add verified entries manually.
 
 ### Via GitHub Pull Request
 

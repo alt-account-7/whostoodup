@@ -4,11 +4,14 @@ There are two ways to contribute: submitting entries and moderating PRs.
 
 ---
 
-## Not comfortable with GitHub? Tweet it to us
+## Not comfortable with GitHub? Send it on X or Instagram
 
-If you're not familiar with GitHub, you can tweet your submission to **[@WhoStoodUp](https://x.com/WhoStoodUp)** and we'll add it ourselves.
+If you're not familiar with GitHub, you can send your submission on social and we'll add it ourselves:
 
-Include in your tweet:
+- **X:** Tweet **[@WhoStoodUp](https://x.com/WhoStoodUp)**
+- **Instagram:** Tag **[@whostoodup](https://www.instagram.com/whostoodup/)** in a story, or [DM us](https://www.instagram.com/whostoodup/) there
+
+Include:
 - **Name** of the public figure
 - **Role** — celebrity / politician / influencer / journalist / other
 - **Stance** — support / opposition / neutral
@@ -16,7 +19,7 @@ Include in your tweet:
 - **Source link** — a public URL where the statement can be verified
 - **Date** they said it (approximate is fine)
 
-We review all tweets and add verified entries manually. No GitHub account needed.
+We review submissions and add verified entries manually. No GitHub account needed.
 
 ---
 
