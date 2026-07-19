@@ -75,6 +75,8 @@ No paraphrasing. No "gist." No editorial summary. If you have a source showing a
 
 `timestamp` is when the person made the statement — not when you submit the PR. IST only (`YYYY-MM-DD HH:MM`). If you don't know the exact time, use `HH:00` for the hour.
 
+X/Twitter `created_at` with `+0000` is UTC — convert to IST (+5:30) before writing the field or filename. Do not copy the clock time from the X UI without confirming the timezone.
+
 ### Duplicates
 
 Check `data/entries/` before submitting — search for the person's name slug. CI also detects likely duplicates (same name + source URL). If the same person made *multiple* statements, each with a different source, each can have its own entry.

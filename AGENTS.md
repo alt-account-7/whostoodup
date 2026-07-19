@@ -45,6 +45,20 @@ One file per entry in `data/entries/`. Shared validation logic is in `scripts/va
 
 `schema_version` in `data/config.json` and `dist/entries.json`: bump on any breaking schema change so downstream tools don't silently break.
 
+## Entry timestamps (IST — do not skip)
+
+`timestamp` and the filename time must be **IST** (`YYYY-MM-DD HH:MM`). Never paste a clock time from a source without checking its timezone.
+
+**X / Twitter (common failure mode):**
+- API / fxtwitter `created_at` with `+0000` is **UTC**, not IST.
+- Convert: IST = UTC + 5:30. Example: `13:30 UTC` → `19:00 IST`.
+- The "1:30 PM" shown on x.com is often the viewer's local time — do **not** treat it as IST unless you confirmed the zone.
+- Prefer `created_at` (+0000) → convert to IST, then set `timestamp` and rename the file to match (`YYYY-MM-DD-HHMM_slug.json`).
+
+**Other sources:** Instagram "Posted On" via imginn is usually already local India time when the poster is India-based — still verify. News articles: use the article's stated local time or publication time in IST when available; if only a date is known, use `HH:00`.
+
+Before finishing an entry from X, re-read `created_at` and confirm the IST math once.
+
 ## Tests
 
 - Unit tests: `tests/unit/*.test.js` (Vitest)
