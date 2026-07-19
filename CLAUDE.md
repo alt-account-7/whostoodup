@@ -64,7 +64,7 @@ Stance coding: support = accent + bold · opposition = foreground + bold · conc
 }
 ```
 
-Entry filenames: `YYYY-MM-DD-HHMM_name-slug.json` — timestamp is statement time, not PR time.
+Entry filenames: `YYYY-MM-DD-HHMM_name-slug.json` — timestamp is statement time (IST), not PR time. X/Twitter `created_at` (`+0000`) is UTC → add 5:30 for IST. See `AGENTS.md` § Entry timestamps.
 
 ## Security non-negotiables
 
